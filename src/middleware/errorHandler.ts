@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 // Error handler middleware
 
 const errorHandler = (err: Error, req: Request, res: Response) => {
   const statusCode = getStatusCode(err);
-  res.status(statusCode).json({ error: err.message });
+  return res.status(statusCode).json({ error: err.message });
 };
 
 const getStatusCode = (err: Error): number => {
@@ -12,7 +12,7 @@ const getStatusCode = (err: Error): number => {
   else if (err instanceof AuthenticationError) return 401;
   else if (err instanceof AuthorizationError) return 403;
   else return 500;
-}
+};
 
 // Custom error classes
 

@@ -1,11 +1,11 @@
 interface Session {
-	id: string,
-	user: number,
-	expiration: number,
+  id: string,
+  user: number,
+  expiration: number,
 }
 
 interface Token {
-	token: string,
+  token: string,
 }
 
 export { Session, Token };
