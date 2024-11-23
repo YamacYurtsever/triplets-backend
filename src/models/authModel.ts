@@ -1,6 +1,6 @@
 interface Session {
   id: string,
-  user: number,
+  user: string,
   expiration: number,
 }
 
