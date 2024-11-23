@@ -17,7 +17,6 @@ const setData = (newData: Data) => {
 
 const clearData = () => {
   data = emptyData;
-  return {};
 };
 
 const saveData = () => {
