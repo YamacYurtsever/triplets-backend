@@ -3,7 +3,6 @@ interface User {
 	name: string,
 	email: string,
 	password: string, 
-	sessions: string[],
 }
 
 export { User };

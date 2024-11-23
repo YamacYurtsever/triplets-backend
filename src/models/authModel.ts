@@ -1,6 +1,11 @@
-interface Token {
+interface Session {
+	id: string,
 	user: number,
-	session: number,
+	expiration: number,
 }
 
-export { Token };
+interface Token {
+	token: string,
+}
+
+export { Session, Token };
