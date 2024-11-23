@@ -31,8 +31,8 @@ paths:
         "400":
           description: |
             If any of the following are true:
-            - Username contains characters other than lowercase letters, uppercase letters, numbers, spaces
-            - Username is less than 2 characters or more than 20 characters
+            - Name contains characters other than lowercase letters, uppercase letters, numbers, spaces
+            - Name is less than 2 characters or more than 20 characters
             - Email is not in valid format
             - Email is used by another user
             - Password does not contain at least one number and at least one letter
@@ -86,7 +86,7 @@ components:
     Token:
       type: string
       example: "sf67sdr7#6d^^s$$f6#37sio2"
-    Username:
+    Name:
       type: string
       example: "Mariocho"
     Email:
@@ -113,8 +113,8 @@ components:
           schema:
             type: object
             properties:
-              username:
-                $ref: '#/components/schemas/Username'
+              name:
+                $ref: '#/components/schemas/Name'
               email:
                 $ref: '#/components/schemas/Email'
               password:
