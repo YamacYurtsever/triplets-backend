@@ -24,7 +24,7 @@ const saveData = () => {
 };
 
 const loadData = () => {
-  // Send data to database
+  // Get data from database
 };
 
 export { getData, setData, clearData, saveData, loadData };
