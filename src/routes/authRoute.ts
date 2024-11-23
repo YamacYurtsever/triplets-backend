@@ -1,4 +1,4 @@
-import { Request, Response, Router, NextFunction } from 'express';
+import { Request, Response, Router } from 'express';
 import { authRegister } from '../controllers/authController';
 import { saveData } from '../data';
 
@@ -12,11 +12,11 @@ authRouter.post('/register', (req: Request, res: Response) => {
 });
 
 authRouter.post('/login', (req: Request, res: Response) => {
-  
+
 });
 
 authRouter.post('/logout', (req: Request, res: Response) => {
-  
+
 });
 
 export default authRouter;
