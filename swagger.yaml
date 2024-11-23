@@ -31,7 +31,7 @@ paths:
         "400":
           description: |
             If any of the following are true:
-            - Username contains characters other than lowercase letters, uppercase letters, spaces
+            - Username contains characters other than lowercase letters, uppercase letters, numbers, spaces
             - Username is less than 2 characters or more than 20 characters
             - Email is used by another user
             - Email is not a valid email
