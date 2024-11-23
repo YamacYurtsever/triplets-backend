@@ -13,7 +13,8 @@
     "email-validator": "^2.0.4",
     "express": "^4.21.1",
     "morgan": "^1.10.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
