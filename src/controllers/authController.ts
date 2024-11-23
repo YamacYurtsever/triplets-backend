@@ -1,18 +1,18 @@
 import { BadRequestError } from '../middleware/errorHandler';
 import { Token } from '../models/authModel';
-import { validateName, validateEmail, validatePassword, getNewSession, getNewToken } from '../utils/authUtil';
 import { getNewUser } from '../utils/userUtil';
 import { getData } from '../data';
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+  getNewSession,
+  getNewToken
+} from '../utils/authUtil';
 
 /**
  * Registers a new user with the given name, email, and password.
  * Then starts a new session for the user and returns it in a token.
- *
- * @param name
- * @param email
- * @param password
- *
- * @returns Token
  */
 
 const authRegister = (name: string, email: string, password: string): Token => {
@@ -28,7 +28,7 @@ const authRegister = (name: string, email: string, password: string): Token => {
   if (!validatePassword(password)) {
     throw new BadRequestError('Invalid password');
   }
-  
+
   const data = getData();
 
   // Get a new user and add it to the data

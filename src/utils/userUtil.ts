@@ -8,8 +8,8 @@ const getNewUser = (name: string, email: string, password: string): User => {
     name,
     email,
     password: hashPassword(password),
-  }
+  };
   return newUser;
-}
+};
 
 export { getNewUser };

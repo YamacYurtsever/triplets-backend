@@ -4,10 +4,10 @@ import { v4 as uuid } from 'uuid';
 import { getData } from '../data';
 import { Session, Token } from '../models/authModel';
 import {
-  NAME_REGEX, 
-  NAME_MIN_LENGTH, 
+  NAME_REGEX,
+  NAME_MIN_LENGTH,
   NAME_MAX_LENGTH,
-  PASSWORD_REGEXES, 
+  PASSWORD_REGEXES,
   PASSWORD_MIN_LENGTH,
   SESSION_EXPIRATION_TIME
 } from '../constants/authConstants';
@@ -38,29 +38,29 @@ const validatePassword = (password: string): boolean => {
 
 const hashPassword = (password: string): string => {
   return crypto.createHash('sha256').update(password).digest('hex');
-}
+};
 
 const getNewSession = (userId: string): Session => {
   const newSession: Session = {
     id: uuid(),
     user: userId,
     expiration: Date.now() + SESSION_EXPIRATION_TIME,
-  }
-  return newSession
-}
+  };
+  return newSession;
+};
 
 const getNewToken = (sessionId: string): Token => {
   const newToken: Token = {
     token: sessionId
-  }
+  };
   return newToken;
-}
+};
 
-export { 
-  validateName, 
-  validateEmail, 
-  validatePassword, 
-  hashPassword, 
-  getNewSession, 
-  getNewToken 
+export {
+  validateName,
+  validateEmail,
+  validatePassword,
+  hashPassword,
+  getNewSession,
+  getNewToken
 };

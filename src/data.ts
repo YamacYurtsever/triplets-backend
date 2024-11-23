@@ -5,7 +5,7 @@ const emptyData: Data = {
   sessions: [],
 };
 
-let data = emptyData;
+let data: Data = JSON.parse(JSON.stringify(emptyData));
 
 const getData = () => {
   return data;
@@ -16,7 +16,7 @@ const setData = (newData: Data) => {
 };
 
 const clearData = () => {
-  data = emptyData;
+  data = JSON.parse(JSON.stringify(emptyData));
 };
 
 const saveData = () => {

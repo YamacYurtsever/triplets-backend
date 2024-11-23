@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 // Error handler middleware
 
-const errorHandler = (err: Error, req: Request, res: Response) => {
+const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
   const statusCode = getStatusCode(err);
   return res.status(statusCode).json({ error: err.message });
 };
