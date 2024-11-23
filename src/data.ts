@@ -16,6 +16,7 @@ const setData = (newData: Data) => {
 
 const clearData = () => {
   data = emptyData;
+  return {};
 }
 
 export { getData, setData, clearData };

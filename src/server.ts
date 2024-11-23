@@ -1,5 +1,5 @@
 // Packages
-import express, { json, Request, Response } from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
