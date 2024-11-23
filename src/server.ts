@@ -15,15 +15,17 @@ const app = express();
 const PORT: number = parseInt(process.env.PORT || config.port);
 const HOST: string = process.env.IP || '127.0.0.1';
 
-// Middleware
+// Before Middleware
 app.use(json()); // Enable access the JSON body of requests
 app.use(cors()); // Enable access from other domains
 app.use(morgan('dev')); // Log errors to stdout
-app.use(errorHandler); // Handle custom error classes
 
 // Routers
 app.use('/data', dataRouter);
 app.use('/auth', authRouter);
+
+// After Middleware
+app.use(errorHandler); // Handle custom error classes
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
