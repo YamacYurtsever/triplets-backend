@@ -35,8 +35,8 @@ paths:
             - Username is less than 2 characters or more than 20 characters
             - Email is used by another user
             - Email is not a valid email
-            - Password is less than 8 characters
             - Password does not contain at least one number and at least one letter
+            - Password is less than 8 characters
           content:
             application/json:
               schema:
