@@ -18,7 +18,7 @@ app.use(cors()); // Enable access from other domains
 app.use(morgan('dev')); // Log errors to stdout
 
 // Routes
-app.use('/:version/data', dataRouter);
+app.use('/data', dataRouter);
 app.get('/message', (req: Request, res: Response) => {
   const message = 'Display this message my little frontend cutie :)';
   return res.status(200).json({ message });
