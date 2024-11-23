@@ -5,6 +5,7 @@ import morgan from 'morgan';
 
 // Multifile
 import config from './config.json';
+import dataRouter from './routes/dataRoute';
 
 // Setup server
 const app = express();
@@ -16,14 +17,12 @@ app.use(json()); // Enable access the JSON body of requests
 app.use(cors()); // Enable access from other domains
 app.use(morgan('dev')); // Log errors to stdout
 
-/// ////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Routes
+app.use('/:version/data', dataRouter);
 app.get('/message', (req: Request, res: Response) => {
   const message = 'Display this message my little frontend cutie :)';
   return res.status(200).json({ message });
 });
-
-/// ////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
