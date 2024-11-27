@@ -106,7 +106,7 @@ components:
     
   requestBodies:
     Register:
-      description: "The body for registering a new user"
+      description: The body for registering a new user
       required: true
       content:
         application/json:
@@ -120,7 +120,7 @@ components:
               password:
                 $ref: '#/components/schemas/Password'
     Login:
-      description: "The body for logging in a user"
+      description: The body for logging in a user
       required: true
       content:
         application/json:
@@ -134,7 +134,10 @@ components:
     
   responses:
     AuthenticationError:
-      description: "Authentication Error"
+      description: |
+        Authentication Error:
+        - Token refers to invalid session
+        - Session is expired
       content:
         application/json:
           schema:
@@ -142,10 +145,11 @@ components:
             properties:
               error:
                 type: string
-                example: "Authentication error"
+                example: "Authentication failed"
     
     AuthorizationError:
-      description: "Authorization Error"
+      description: |
+        Authorization Error: The user that the session in the token belongs to doesn't own the payload
       content:
         application/json:
           schema:
@@ -153,7 +157,7 @@ components:
             properties:
               error:
                 type: string
-                example: "Authorization error"
+                example: "Unauthorized action"
     
     EmptyResponse:
       description: "OK"
