@@ -24,4 +24,10 @@ const requestAuthRegister = (name: string, email: string, password: string) => {
   return requestHelper('POST', '/auth/register', headers, payload);
 };
 
-export { TOKEN, VALID_USER, INVALID_USERS, requestAuthRegister };
+const requestAuthLogin = (email: string, password: string) => {
+  const headers = {};
+  const payload = { email, password };
+  return requestHelper('POST', '/auth/login', headers, payload);
+};
+
+export { TOKEN, VALID_USER, INVALID_USERS, requestAuthRegister, requestAuthLogin };
