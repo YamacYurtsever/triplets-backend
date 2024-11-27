@@ -1,6 +1,6 @@
 import { BadRequestError } from '../middleware/errorHandler';
 import { Token } from '../models/authModel';
-import { getNewUser } from '../utils/userUtil';
+import { getNewUser, getUserFromEmail } from '../utils/userUtil';
 import { getData } from '../data';
 import {
   validateName,
@@ -44,8 +44,31 @@ const authRegister = (name: string, email: string, password: string): Token => {
   return token;
 };
 
+/**
+ * Logs in an existing user with the given email and password,
+ * starting a new session for the user and returns it in a token.
+ */
+
 const authLogin = (email: string, password: string): Token => {
-  return { token: '' };
+  const data = getData();
+  const user = getUserFromEmail(email);
+
+  // Validate input
+  if (user === undefined) {
+    throw new BadRequestError('Invalid email');
+  }
+
+  if (user.password !== password) {
+    throw new BadRequestError('Incorrect password');
+  }
+
+  // Get a new session for the user and add it to the data
+  const session = getNewSession(user.id);
+  data.sessions.push(session);
+
+  // Get a new token for the session and return it
+  const token = getNewToken(session.id);
+  return token;
 };
 
 const authLogout = (email: string, password: string) => {
