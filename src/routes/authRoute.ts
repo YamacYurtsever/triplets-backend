@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { authRegister, authLogin } from '../controllers/authController';
+import { authRegister, authLogin, authLogout } from '../controllers/authController';
 import { saveData } from '../data';
 
 const authRouter = Router();
@@ -19,7 +19,10 @@ authRouter.post('/login', (req: Request, res: Response) => {
 });
 
 authRouter.post('/logout', (req: Request, res: Response) => {
-
+  const token = req.headers.token as string;
+  const response = authLogout(token);
+  saveData();
+  return res.status(200).json(response);
 });
 
 export default authRouter;
