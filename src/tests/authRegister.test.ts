@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 describe('POST /auth/register', () => {
-  test.each(INVALID_USERS)('should return error for invalid user input', (invalidUser) => {
+  test.each(INVALID_USERS)('returns error for invalid user input', (invalidUser) => {
     const res = requestAuthRegister(invalidUser.name, invalidUser.email, invalidUser.password);
     expect(res.statusCode).toBe(400);
     expect(parseBody(res)).toStrictEqual(ERROR);
