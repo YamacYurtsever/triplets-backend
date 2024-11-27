@@ -56,11 +56,20 @@ const getNewToken = (sessionId: string): Token => {
   return newToken;
 };
 
+const validateToken = (token: string): boolean => {
+  const data = getData();
+  
+  const isValid = data.sessions.some((session) => session.id === token);
+
+  return isValid;
+};
+
 export {
   validateName,
   validateEmail,
   validatePassword,
   hashPassword,
   getNewSession,
-  getNewToken
+  getNewToken,
+  validateToken,
 };
