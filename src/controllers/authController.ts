@@ -56,7 +56,7 @@ const authLogin = (email: string, password: string): Token => {
 
   // Validate input
   if (user === undefined) {
-    throw new BadRequestError('Invalid email');
+    throw new BadRequestError('Incorrect email');
   }
 
   if (user.password !== hashPassword(password)) {

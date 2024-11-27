@@ -23,8 +23,8 @@ describe('POST /auth/register', () => {
       requestAuthRegister(VALID_USER.name, VALID_USER.email, VALID_USER.password);
     });
 
-    test('returns error for invalid email', () => {
-      const res = requestAuthLogin('invalid email', VALID_USER.password);
+    test('returns error for incorrect email', () => {
+      const res = requestAuthLogin('incorrect email', VALID_USER.password);
       expect(parseBody(res)).toStrictEqual(ERROR);
       expect(res.statusCode).toBe(400);
     });
