@@ -64,7 +64,7 @@ paths:
                 
   /auth/logout:
     post:
-      summary: Log out a logged in user
+      summary: Log-out a logged in user
       tags:
         - Auth
       parameters:
