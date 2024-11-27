@@ -16,6 +16,8 @@ import {
  */
 
 const authRegister = (name: string, email: string, password: string): Token => {
+  const data = getData();
+
   // Validate input
   if (!validateName(name)) {
     throw new BadRequestError('Invalid username');
@@ -28,8 +30,6 @@ const authRegister = (name: string, email: string, password: string): Token => {
   if (!validatePassword(password)) {
     throw new BadRequestError('Invalid password');
   }
-
-  const data = getData();
 
   // Get a new user and add it to the data
   const user = getNewUser(name, email, password);
