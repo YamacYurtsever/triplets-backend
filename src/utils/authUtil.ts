@@ -58,10 +58,18 @@ const getNewToken = (sessionId: string): Token => {
 
 const validateToken = (token: string): boolean => {
   const data = getData();
-  
-  const isValid = data.sessions.some((session) => session.id === token);
+  const session = data.sessions.find((session) => session.id === token);
 
-  return isValid;
+  if (session === undefined) {
+    return false;
+  }
+
+  if (session.expiration <= Date.now()) {
+    data.sessions = data.sessions.filter((session) => session.id !== token);
+    return false;
+  }
+
+  return true;
 };
 
 export {
