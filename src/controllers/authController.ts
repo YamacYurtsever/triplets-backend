@@ -47,7 +47,7 @@ const authRegister = (name: string, email: string, password: string): Token => {
 };
 
 /**
- * Logs-in an existing user with the given email and password,
+ * Logs in an existing user with the given email and password,
  * starting a new session for the user and returns it in a token.
  */
 
@@ -74,7 +74,7 @@ const authLogin = (email: string, password: string): Token => {
 };
 
 /**
- * Logs-out an existing user, deleting the session in the given token.
+ * Logs out an existing user, deleting the session in the given token.
  */
 
 const authLogout = (token: string) => {
