@@ -6,8 +6,9 @@ import {
   validateName,
   validateEmail,
   validatePassword,
+  hashPassword,
   getNewSession,
-  getNewToken
+  getNewToken,
 } from '../utils/authUtil';
 
 /**
@@ -58,7 +59,7 @@ const authLogin = (email: string, password: string): Token => {
     throw new BadRequestError('Invalid email');
   }
 
-  if (user.password !== password) {
+  if (user.password !== hashPassword(password)) {
     throw new BadRequestError('Incorrect password');
   }
 
