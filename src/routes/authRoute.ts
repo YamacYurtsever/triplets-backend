@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { authRegister } from '../controllers/authController';
+import { authRegister, authLogin } from '../controllers/authController';
 import { saveData } from '../data';
 
 const authRouter = Router();
@@ -12,7 +12,10 @@ authRouter.post('/register', (req: Request, res: Response) => {
 });
 
 authRouter.post('/login', (req: Request, res: Response) => {
-
+  const { email, password } = req.body;
+  const response = authLogin(email, password);
+  saveData();
+  return res.status(200).json(response);
 });
 
 authRouter.post('/logout', (req: Request, res: Response) => {
