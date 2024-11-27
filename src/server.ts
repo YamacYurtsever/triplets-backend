@@ -1,32 +1,35 @@
 // Packages
-import express, { json, Request, Response } from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
 // Multifile
 import config from './config.json';
+import { errorHandler } from './middleware/errorHandler';
+import { loadData } from './data';
+import dataRouter from './routes/dataRoute';
+import authRouter from './routes/authRoute';
 
 // Setup server
 const app = express();
 const PORT: number = parseInt(process.env.PORT || config.port);
 const HOST: string = process.env.IP || '127.0.0.1';
 
-// Middleware
+// Before Middleware
 app.use(json()); // Enable access the JSON body of requests
 app.use(cors()); // Enable access from other domains
 app.use(morgan('dev')); // Log errors to stdout
 
-/// ////////////////////////////////////////////////////////////////////////////////////////////////
+// Routers
+app.use('/data', dataRouter);
+app.use('/auth', authRouter);
 
-app.get('/message', (req: Request, res: Response) => {
-  const message = 'Display this message my little frontend cutie :)';
-  return res.status(200).json({ message });
-});
-
-/// ////////////////////////////////////////////////////////////////////////////////////////////////
+// After Middleware
+app.use(errorHandler); // Handle custom error classes
 
 // Start server
 const server = app.listen(PORT, HOST, () => {
+  loadData();
   console.log(`⚡️ Server started on port ${PORT} at ${HOST}`);
 });
 

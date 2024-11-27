@@ -4,4 +4,175 @@ info:
   title: Triplets API
   version: 1.0.0
   
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/YAMACYURTSEVER123/TripletsAPI/1.0.0
+  
 paths:
+  /data/clear:
+    delete:
+      summary: Reset the state of the application data
+      tags:
+        - Data
+      responses:
+        "200":
+          $ref: '#/components/responses/EmptyResponse'
+  
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Auth
+      requestBody:
+        $ref: '#/components/requestBodies/Register'
+      responses:
+        "200":
+          $ref: '#/components/responses/TokenResponse'
+        "400":
+          description: |
+            If any of the following are true:
+            - Name contains characters other than lowercase letters, uppercase letters, numbers, spaces
+            - Name is less than 2 characters or more than 20 characters
+            - Email is not in valid format
+            - Email is used by another user
+            - Password does not contain at least one number and at least one letter
+            - Password is less than 8 characters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /auth/login:
+    post:
+      summary: Log in an existing user
+      tags:
+        - Auth
+      requestBody:
+        $ref: '#/components/requestBodies/Login'
+      responses:
+        "200":
+          $ref: '#/components/responses/TokenResponse'
+        "400":
+          description: |
+            If any of the following are true:
+            - Email is not used by any user
+            - Password is wrong for the given email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+  /auth/logout:
+    post:
+      summary: Log out a logged in user
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/TokenHeader'
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptyResponse"
+        "401":
+          $ref: '#/components/responses/AuthenticationError'    
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Error message"  
+    Token:
+      type: string
+      example: "sf67sdr7#6d^^s$$f6#37sio2"
+    Name:
+      type: string
+      example: "Mariocho"
+    Email:
+      type: string
+      example: "yamacyurtsever@hotmail.com"
+    Password:
+      type: string
+      example: "password123"
+    
+  parameters:
+    TokenHeader:
+      in: header
+      name: token
+      required: true
+      schema:
+        $ref: '#/components/schemas/Token'
+    
+  requestBodies:
+    Register:
+      description: The body for registering a new user
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/Name'
+              email:
+                $ref: '#/components/schemas/Email'
+              password:
+                $ref: '#/components/schemas/Password'
+    Login:
+      description: The body for logging in a user
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                $ref: '#/components/schemas/Email'
+              password:
+                $ref: '#/components/schemas/Password'
+    
+  responses:
+    AuthenticationError:
+      description: |
+        Authentication Error:
+        - Token refers to invalid session
+        - Session is expired
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Authentication failed"
+    
+    AuthorizationError:
+      description: |
+        Authorization Error: The user that the session in the token belongs to doesn't own the payload
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unauthorized action"
+    
+    EmptyResponse:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+    
+    TokenResponse:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token: 
+                $ref: '#/components/schemas/Token'
+                
