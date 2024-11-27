@@ -1,4 +1,4 @@
-import { BadRequestError } from '../middleware/errorHandler';
+import { AuthenticationError, BadRequestError } from '../middleware/errorHandler';
 import { Token } from '../models/authModel';
 import { getNewUser, getUserFromEmail } from '../utils/userUtil';
 import { getData } from '../data';
@@ -9,6 +9,7 @@ import {
   hashPassword,
   getNewSession,
   getNewToken,
+  validateToken,
 } from '../utils/authUtil';
 
 /**
@@ -46,7 +47,7 @@ const authRegister = (name: string, email: string, password: string): Token => {
 };
 
 /**
- * Logs in an existing user with the given email and password,
+ * Logs-in an existing user with the given email and password,
  * starting a new session for the user and returns it in a token.
  */
 
@@ -72,8 +73,22 @@ const authLogin = (email: string, password: string): Token => {
   return token;
 };
 
-const authLogout = (email: string, password: string) => {
-  return {};
+/**
+ * Logs-out an existing user, deleting the session in the given token.
+ */
+
+const authLogout = (token: string) => {
+  const data = getData();
+
+  // Validate input
+  if (!validateToken(token)) {
+    throw new AuthenticationError();
+  }
+
+  // Delete the session in the token from the data
+  data.sessions = data.sessions.filter((session) => session.id !== token);
+
+  return {}
 };
 
 export { authRegister, authLogin, authLogout };
