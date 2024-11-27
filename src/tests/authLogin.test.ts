@@ -2,7 +2,6 @@ import { ERROR, parseBody } from '../utils/testUtil/testUtil';
 import { requestDataClear } from '../utils/testUtil/dataTestUtil';
 import {
   VALID_USER,
-  INVALID_USERS,
   TOKEN,
   requestAuthRegister,
   requestAuthLogin
