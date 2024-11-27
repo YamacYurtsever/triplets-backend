@@ -36,11 +36,11 @@ const requestAuthLogout = (token: string) => {
   return requestHelper('POST', '/auth/logout', headers, payload);
 };
 
-export { 
-  TOKEN, 
-  VALID_USER, 
-  INVALID_USERS, 
-  requestAuthRegister, 
-  requestAuthLogin, 
-  requestAuthLogout 
+export {
+  TOKEN,
+  VALID_USER,
+  INVALID_USERS,
+  requestAuthRegister,
+  requestAuthLogin,
+  requestAuthLogout
 };

@@ -2,7 +2,6 @@ import { ERROR, EMPTY, parseBody } from '../utils/testUtil/testUtil';
 import { requestDataClear } from '../utils/testUtil/dataTestUtil';
 import {
   VALID_USER,
-  TOKEN,
   requestAuthRegister,
   requestAuthLogout
 } from '../utils/testUtil/authTestUtil';
@@ -30,7 +29,7 @@ describe('POST /auth/register', () => {
     expect(res.statusCode).toBe(200);
   });
 
-  test('return error when trying to logout multiple times using the same token', () => {
+  test('returns error when trying to logout multiple times using the same token', () => {
     const res1 = requestAuthLogout(token);
     expect(parseBody(res1)).toStrictEqual(EMPTY);
     expect(res1.statusCode).toBe(200);

@@ -88,7 +88,7 @@ const authLogout = (token: string) => {
   // Delete the session in the token from the data
   data.sessions = data.sessions.filter((session) => session.id !== token);
 
-  return {}
+  return {};
 };
 
 export { authRegister, authLogin, authLogout };
